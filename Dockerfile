@@ -1,4 +1,16 @@
-FROM tomcat:9.0-jdk17-temurin
+FROM maven:3.9.9-eclipse-temurin-21 AS build
+WORKDIR /app
+
+# Copy pom.xml trước để cache dependency
+COPY pom.xml .
+RUN mvn dependency:go-offline -B
+
+# Copy source và build WAR
+COPY src ./src
+RUN mvn clean package -DskipTests
+
+#Stage 2: Build
+FROM tomcat:9.0-jdk21-temurin
 
 WORKDIR /usr/local/tomcat
 

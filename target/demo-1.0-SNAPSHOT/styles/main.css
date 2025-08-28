@@ -7,6 +7,9 @@ body {
 h1 {
     color: teal;
 }
+h2 {
+    color: teal;
+}
 label {
     float: left;
     width: 6em;
