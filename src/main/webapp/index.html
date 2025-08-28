@@ -6,9 +6,11 @@
     <link rel="stylesheet" href="styles/main.css" type="text/css"/>
 </head>
 <body>
-<h1>Join our email list</h1>
-<p>To join our email list, enter your name and
-    email address below.</p>
+<img src="resources/murach_logo.jpg" alt="Murach Logo" id="logo" width="100">
+<h1>Survey</h1>
+<p>If you have a moment, we'd appreciate it if you would
+    fill out this survey.</p>
+<h2>Your information:</h2>
 <form action="emailList" method="post">
     <input type="hidden" name="action" value="add">
 
@@ -27,8 +29,31 @@
         <input type="text" name="lastName" required>
     </label><br>
 
-    <label>&nbsp;</label>
-    <input type="submit" value="Join Now" id="submit">
+    <label>Date of Birth:</label>
+    <label>
+        <input type="date" name="birthDate" required>
+    </label><br>
+    <h2>How did you hear about us?</h2>
+    <input type="radio" name="hearAboutUs" value="Search engine" checked> Search engine
+    <input type="radio" name="hearAboutUs" value="Word of mouth"> Word of mouth
+    <input type="radio" name="hearAboutUs" value="Social Media"> Social Media
+    <input type="radio" name="hearAboutUs" value="Other"> Other
+    <br><br>
+
+    <h2>Would you like to receive announcements about new CDs and special offers?</h2>
+    <input type="checkbox" name="wantsAnnouncements" value="YES, I'd like that."> YES, I'd like that.<br>
+    <input type="checkbox" name="wantsAnnouncements" value="YES, please send me email announcements."> YES, please send me email announcements.<br><br>
+
+    <div>
+        <label for="contactMethod">Please contact me by:</label>
+        <select name="contactMethod" id="contactMethod">
+            <option>Email or postal mail</option>
+            <option>Email only</option>
+            <option>Postal mail only</option>
+        </select>
+    </div>
+    <br>
+    <input type="submit" value="Submit">
 </form>
 </body>
 </html>

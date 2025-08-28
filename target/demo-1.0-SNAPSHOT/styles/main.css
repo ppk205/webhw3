@@ -12,6 +12,10 @@ label {
     width: 6em;
     margin-bottom: 0.5em;
 }
+span {
+    display: inline-block;
+    margin-bottom: 10px;
+}
 input[type="text"], input[type="email"]{
     width: 15em;
     margin-left: 0.5em;

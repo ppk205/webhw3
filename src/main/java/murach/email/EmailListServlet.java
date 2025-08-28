@@ -29,9 +29,20 @@ public class EmailListServlet extends HttpServlet  {
             String firstName = request.getParameter("firstName");
             String lastName = request.getParameter("lastName");
             String email = request.getParameter("email");
+            String birthDate = request.getParameter("birthDate");
+            String hearAboutUs = request.getParameter("hearAboutUs");
+            String contactMethod = request.getParameter("contactMethod");
+            String wantsAnnouncements = request.getParameter("wantsAnnouncements");
 
             // store data in User object and save User object in db
-            User user = new User(firstName, lastName, email);
+            User user = new User();
+            user.setFirstName(firstName);
+            user.setLastName(lastName);
+            user.setEmail(email);
+            user.setBirthDate(birthDate);
+            user.setHearAboutUs(hearAboutUs);
+            user.setContactMethod(contactMethod);
+            user.setWantsAnnouncements(wantsAnnouncements);
 
             // set User object in request object and set URL
             request.setAttribute("user", user);
