@@ -1,3 +1,4 @@
 murach\business\User.class
-com\example\demo\HelloServlet.class
 murach\email\EmailListServlet.class
+murach\email\TestServlet.class
+com\example\demo\HelloServlet.class
