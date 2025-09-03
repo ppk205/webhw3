@@ -6,7 +6,7 @@ import javax.servlet.http.*;
 
 import murach.business.User;
 
-public class EmailListServlet extends HttpServlet  {
+public class EmailListServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request,
@@ -23,8 +23,7 @@ public class EmailListServlet extends HttpServlet  {
         // perform action and set URL to appropriate page
         if (action.equals("join")) {
             url = "/index.html";    // the "join" page
-        }
-        else if (action.equals("add")) {
+        } else if (action.equals("add")) {
             // get parameters from the request
             String firstName = request.getParameter("firstName");
             String lastName = request.getParameter("lastName");
@@ -33,31 +32,47 @@ public class EmailListServlet extends HttpServlet  {
             String hearAboutUs = request.getParameter("hearAboutUs");
             String contactMethod = request.getParameter("contactMethod");
             String wantsAnnouncements = request.getParameter("wantsAnnouncements");
+            String message = "";
+            // validate the parameters
+            if (firstName == null || firstName.isEmpty())
+                message = "First name is required.";
+            else if (lastName == null || lastName.isEmpty())
+                message = "Last name is required.";
+            else if (email == null || email.isEmpty())
+                message = "Email address is required.";
+            else if (birthDate == null || birthDate.isEmpty())
+                message = "Birth date is required.";
+            if (!message.isEmpty()) {
+                // Validation failed
+                request.setAttribute("message", message);
+                url = "/index.html";
+            } else {
+                // store data in User object and save User object in db
+                User user = new User();
+                user.setFirstName(firstName);
+                user.setLastName(lastName);
+                user.setEmail(email);
+                user.setBirthDate(birthDate);
+                user.setHearAboutUs(hearAboutUs);
+                user.setContactMethod(contactMethod);
+                user.setWantsAnnouncements(wantsAnnouncements);
 
-            // store data in User object and save User object in db
-            User user = new User();
-            user.setFirstName(firstName);
-            user.setLastName(lastName);
-            user.setEmail(email);
-            user.setBirthDate(birthDate);
-            user.setHearAboutUs(hearAboutUs);
-            user.setContactMethod(contactMethod);
-            user.setWantsAnnouncements(wantsAnnouncements);
-
-            // set User object in request object and set URL
-            request.setAttribute("user", user);
-            url = "/thanks.jsp";   // the "thanks" page
+                // set User object in request object and set URL
+                request.setAttribute("user", user);
+                url = "/thanks.jsp";   // the "thanks" page
+            }
         }
-
         // forward request and response objects to specified URL
         getServletContext()
                 .getRequestDispatcher(url)
                 .forward(request, response);
-    }
+    } // Missing closing brace for doPost method
+
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response)
             throws ServletException, IOException {
         doPost(request, response);
     }
-}
+
+} // Missing closing brace for the class
